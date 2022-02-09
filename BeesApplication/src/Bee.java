@@ -1,3 +1,6 @@
-public abstract class Bee {
+public interface Bee {
+
+    void move();
+    void takeDamage();
 
 }
