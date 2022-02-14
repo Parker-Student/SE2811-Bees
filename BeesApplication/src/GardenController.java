@@ -1,8 +1,12 @@
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+
+import java.awt.*;
 
 public class GardenController {
 
@@ -13,6 +17,10 @@ public class GardenController {
 
     AimlessBee aimlessBee = new AimlessBee();
     SearchingBee searchingBee = new SearchingBee();
+@FXML
+    Label health1;
+    @FXML
+    Label health;
 
     public GardenController() {
     }
@@ -24,8 +32,8 @@ public class GardenController {
         createBee(aimlessBeeBox,aimlessBee.image, aimlessBee.name);
         displayBee(aimlessBeeBox, aimlessBee.getxLocation(),aimlessBee.getyLocation());
 
-        //createBee(searchingBeeBox,searchingBee.image, searchingBee.name);
-        //displayBee(searchingBeeBox, aimlessBee.getxLocation(),aimlessBee.getyLocation());
+        createBee(searchingBeeBox,searchingBee.image, searchingBee.name);
+        displayBee(searchingBeeBox, searchingBee.getxLocation(),searchingBee.getyLocation());
 
         theGarden.setFocusTraversable(true); // ensure garden pane will receive keypresses
     }
@@ -60,18 +68,28 @@ public class GardenController {
     @FXML
     public void onKeyPressed() {
 
+        updateHealth();
+
         aimlessBee.move();
         if(aimlessBee.isAlive())
             displayBee(aimlessBeeBox, aimlessBee.getxLocation(),aimlessBee.getyLocation());
         else
             removeBee(aimlessBeeBox);
 
-        //  searchingBee.move();
-        /*
+        searchingBee.move();
+
         if(searchingBee.isAlive())
-             displayBee(searchingBeeBox, aimlessBee.getxLocation(),aimlessBee.getyLocation());
+             displayBee(searchingBeeBox, searchingBee.getxLocation(),searchingBee.getyLocation());
         else
-            removeBee(searchingBeeBox);*/
+            removeBee(searchingBeeBox);
+
+    }
+
+    public void updateHealth(){
+        health.setText(aimlessBee.name + ": " + aimlessBee.health);
+        health.setTextFill(Color.WHITE);
+        health1.setText(searchingBee.name + ": " + searchingBee.health);
+        health1.setTextFill(Color.WHITE);
     }
 
     private void removeBee(Pane beeBox){

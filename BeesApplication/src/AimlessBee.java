@@ -4,8 +4,8 @@ import javafx.scene.image.ImageView;
 public class AimlessBee implements Bee {
     public ImageView image;
     public String name;
-    public double xLocation = 300;
-    public double yLocation = 300;
+    public double xLocation = 100;
+    public double yLocation = 500;
     public int health = 100;
     public boolean isAlive = true;
 
@@ -43,13 +43,12 @@ public class AimlessBee implements Bee {
 
     @Override
     public void takeDamage() {
-
-        health--;
+        if(health > 0)
+            health--;
 
         if(health <= 0)
             isAlive = false;
     }
-
 
     public double getyLocation() {
         return yLocation;
